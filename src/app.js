@@ -50,6 +50,20 @@ express.response.constructor.prototype.fromLambdaResponse = function (res) {
 
 const apigw = new express.Router();
 
+// wake endpoint.
+apigw
+    .route('/')
+    .get(async (req, res, next) => {
+        try {
+            return res.status(200).send({
+                success: true,
+                message: "waking up as soon as possible!"
+            })
+        } catch (err) {
+            next(err);
+        }
+    })
+
 // Render endpoint.
 apigw
     .route('/render')
